@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    
+    <!-- Primary Meta Tags -->
+    <title>JJ Quantums — Preparing Software for the Post-Quantum World</title>
+    <meta name="title" content="JJ Quantums — Preparing Software for the Post-Quantum World">
+    <meta name="description" content="JJ Quantums is building developer-first technology for the post-quantum era, starting with tools that help software discover, understand, and prepare for cryptographic change.">
+    <meta name="keywords" content="JJ Quantums, post-quantum security, post-quantum cryptography, Quantums Guard, PQC migration, quantum computing, JJ Coders Group, cryptographic agility, NIST PQC, ML-KEM, ML-DSA">
+    <meta name="author" content="JJ Coders Group">
+    <link rel="canonical" href="https://jjcoders.com/quantums/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="/logo.png">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://jjcoders.com/quantums/">
+    <meta property="og:title" content="JJ Quantums — Preparing Software for the Post-Quantum World">
+    <meta property="og:description" content="JJ Quantums is building developer-first technology for the post-quantum era, starting with tools that help software discover, understand, and prepare for cryptographic change.">
+    <meta property="og:image" content="https://jjcoders.com/logo.png">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://jjcoders.com/quantums/">
+    <meta name="twitter:title" content="JJ Quantums — Preparing Software for the Post-Quantum World">
+    <meta name="twitter:description" content="JJ Quantums is building developer-first technology for the post-quantum era, starting with tools that help software discover, understand, and prepare for cryptographic change.">
+    <meta name="twitter:image" content="https://jjcoders.com/logo.png">
+
+    <!-- Google Fonts: Instrument Serif (Italic) + Barlow + JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        heading: ['"Instrument Serif"', 'serif'],
+                        body: ['"Barlow"', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+                    },
+                    borderRadius: {
+                        DEFAULT: '9999px',
+                    },
+                    colors: {
+                        spaceBlack: '#000000',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Liquid-Glass & Cinematic Video Styling -->
+    <style>
+        :root {
+            --bg-space: #000000;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-space);
+            color: #FFFFFF;
+            font-family: 'Barlow', sans-serif;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* Heading Serif Utility */
+        .font-heading-italic {
+            font-family: 'Instrument Serif', serif;
+            font-style: italic;
+        }
+
+        /* =========================================
+           LIQUID-GLASS DESIGN SYSTEM (Exact Spec)
+           ========================================= */
+        .liquid-glass {
+            background: rgba(255, 255, 255, 0.02);
+            background-blend-mode: luminosity;
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: none;
+            box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.15), 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .liquid-glass::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.4px;
+            background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.45) 0%,
+                rgba(255, 255, 255, 0.15) 20%,
+                rgba(255, 255, 255, 0) 40%,
+                rgba(255, 255, 255, 0) 60%,
+                rgba(255, 255, 255, 0.15) 80%,
+                rgba(255, 255, 255, 0.45) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        .liquid-glass-strong {
+            background: rgba(255, 255, 255, 0.04);
+            background-blend-mode: luminosity;
+            backdrop-filter: blur(50px);
+            -webkit-backdrop-filter: blur(50px);
+            border: none;
+            box-shadow: 4px 4px 20px rgba(0, 0, 0, 0.35), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .liquid-glass-strong::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1.4px;
+            background: linear-gradient(180deg,
+                rgba(255, 255, 255, 0.55) 0%,
+                rgba(255, 255, 255, 0.22) 20%,
+                rgba(255, 255, 255, 0) 40%,
+                rgba(255, 255, 255, 0) 60%,
+                rgba(255, 255, 255, 0.22) 80%,
+                rgba(255, 255, 255, 0.55) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* Seamless Video Crossfade Layer */
+        .fading-video {
+            opacity: 0;
+            will-change: opacity;
+            pointer-events: none;
+        }
+
+        /* Subtle Vignette Masks */
+        .cinematic-vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle 800px at 50% 30%, transparent 10%, rgba(0, 0, 0, 0.6) 70%, #000000 100%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Blur-In Section Reveals */
+        .blur-reveal {
+            opacity: 0;
+            filter: blur(10px);
+            transform: translateY(24px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), filter 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, filter, transform;
+        }
+
+        .blur-reveal.is-visible {
+            opacity: 1;
+            filter: blur(0px);
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        /* Prefers-reduced-motion */
+        @media (prefers-reduced-motion: reduce) {
+            .blur-reveal {
+                opacity: 1 !important;
+                filter: none !important;
+                transform: none !important;
+                transition: none !important;
+            }
+            .fading-video {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-black text-white relative min-h-screen selection:bg-white/20 selection:text-white">
+
+    <!-- ======================================================== -->
+    <!-- FIXED LIQUID-GLASS NAVIGATION BAR                        -->
+    <!-- ======================================================== -->
+    <header class="fixed top-4 inset-x-0 z-50 px-4 sm:px-8 lg:px-16 pointer-events-none">
+        <div class="max-w-6xl mx-auto flex items-center justify-between pointer-events-auto">
+            
+            <!-- Left: Logo Circle with Italic Serif "Q" -->
+            <a href="#hero" class="w-12 h-12 rounded-full liquid-glass flex items-center justify-center text-white font-heading-italic text-2xl hover:scale-105 transition-transform" aria-label="JJ Quantums Home">
+                Q
+            </a>
+
+            <!-- Center: Floating Liquid-Glass Pill Navigation -->
+            <nav class="hidden md:flex items-center gap-1 liquid-glass rounded-full px-2 py-1.5 shadow-2xl" aria-label="Main Navigation">
+                <a href="#hero" class="px-3.5 py-1.5 text-xs lg:text-sm font-medium text-white/90 hover:text-white transition-colors">Overview</a>
+                <a href="#why" class="px-3.5 py-1.5 text-xs lg:text-sm font-medium text-white/90 hover:text-white transition-colors">The Imperative</a>
+                <a href="#product" class="px-3.5 py-1.5 text-xs lg:text-sm font-medium text-white/90 hover:text-white transition-colors flex items-center gap-1.5">
+                    <span>Quantums Guard</span>
+                    <span class="text-[0.62rem] font-mono px-1.5 py-0.5 rounded-full bg-white/10 text-white/90">DEV</span>
+                </a>
+                <a href="#vision" class="px-3.5 py-1.5 text-xs lg:text-sm font-medium text-white/90 hover:text-white transition-colors">Vision</a>
+                
+                <a href="/" class="px-3.5 py-1.5 text-xs lg:text-sm font-medium text-white/60 hover:text-white transition-colors flex items-center gap-1">
+                    <span>JJ Coders</span>
+                    <svg class="w-3 h-3 text-white/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                </a>
+
+                <!-- Primary CTA Pill inside Nav -->
+                <button type="button" onclick="openWaitlistModal()" class="ml-1 bg-white text-black rounded-full px-4 py-1.5 text-xs lg:text-sm font-medium hover:bg-white/90 transition-all flex items-center gap-1.5 whitespace-nowrap cursor-pointer">
+                    <span>Claim Waitlist Spot</span>
+                    <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </button>
+            </nav>
+
+            <!-- Right: Balance Action / Mobile Menu Toggle -->
+            <div class="flex items-center gap-2">
+                <button type="button" onclick="openWaitlistModal()" class="md:hidden bg-white text-black rounded-full px-4 py-2 text-xs font-semibold whitespace-nowrap cursor-pointer">
+                    Join Waitlist
+                </button>
+
+                <button type="button" id="mobile-toggle-btn" class="md:hidden w-12 h-12 rounded-full liquid-glass flex items-center justify-center text-white focus:outline-none" aria-label="Toggle navigation menu">
+                    <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="4" y1="7" x2="20" y2="7"></line>
+                        <line x1="4" y1="12" x2="20" y2="12"></line>
+                        <line x1="4" y1="17" x2="20" y2="17"></line>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobile-drawer" class="hidden md:hidden max-w-sm mx-auto mt-3 liquid-glass-strong rounded-3xl p-6 pointer-events-auto shadow-2xl">
+            <nav class="flex flex-col gap-4 text-center font-medium text-sm">
+                <a href="#hero" class="mobile-link text-white/90 py-1">Overview</a>
+                <a href="#why" class="mobile-link text-white/90 py-1">The Imperative</a>
+                <a href="#product" class="mobile-link text-white/90 py-1 flex items-center justify-center gap-2">
+                    <span>Quantums Guard</span>
+                    <span class="text-[0.62rem] font-mono px-2 py-0.5 rounded-full bg-white/10">DEV</span>
+                </a>
+                <a href="#vision" class="mobile-link text-white/90 py-1">Vision</a>
+                <a href="/" class="text-white/60 py-1 flex items-center justify-center gap-1 text-xs">
+                    <span>Return to JJ Coders</span>
+                    <svg class="w-3 h-3 text-white/60" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+
+    <!-- ======================================================== -->
+    <!-- SECTION 1 — HERO (Full Viewport, Cinematic Video)        -->
+    <!-- ======================================================== -->
+    <section id="hero" class="relative min-h-screen flex flex-col justify-between pt-32 pb-12 overflow-hidden bg-black">
+        
+        <!-- Video 1: Cinematic Space-Travel Looping Background (JS rAF Crossfade) -->
+        <video 
+            id="hero-bg-video" 
+            class="fading-video absolute left-1/2 top-0 -translate-x-1/2 object-cover object-top z-0" 
+            style="width: 120%; height: 120%;"
+            muted 
+            playsinline 
+            preload="auto"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_080021_d598092b-c4c2-4e53-8e46-94cf9064cd50.mp4">
+        </video>
+
+        <!-- Subtle Vignette Layer -->
+        <div class="cinematic-vignette" aria-hidden="true"></div>
+
+        <!-- Hero Content Area -->
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center flex-1 flex flex-col items-center justify-center my-auto">
+            
+            <!-- Eyebrow & Status Badge (Liquid-Glass Pill) -->
+            <div class="blur-reveal inline-flex items-center gap-2.5 liquid-glass rounded-full px-3 py-1.5 mb-8 shadow-xl">
+                <span class="bg-white text-black rounded-full px-3 py-0.5 text-xs font-semibold uppercase tracking-wider">
+                    JJ QUANTUMS
+                </span>
+                <span class="text-xs text-white/90 font-medium pr-2 font-mono tracking-wider">
+                    COMING SOON
+                </span>
+            </div>
+
+            <!-- Main Headline (Instrument Serif Italic, Massive, Cinematic) -->
+            <h1 class="blur-reveal font-heading-italic text-5xl sm:text-7xl md:text-8xl lg:text-[5.8rem] text-white leading-[0.9] max-w-3xl mx-auto tracking-[-2px] sm:tracking-[-3px] mb-6">
+                Preparing software for the post-quantum world.
+            </h1>
+
+            <!-- Supporting Copy -->
+            <p class="blur-reveal font-body font-light text-base sm:text-lg md:text-xl text-white/85 max-w-2xl mx-auto leading-relaxed mb-8">
+                We’re building the next generation of tools for quantum-era software security — helping developers discover, understand, and prepare for cryptographic change.
+            </p>
+
+            <!-- Interactive Liquid-Glass Email Input Bar (From Prompt 2) -->
+            <div class="blur-reveal w-full max-w-xl mx-auto mb-6">
+                <form onsubmit="handleWaitlistSubmit(event)" class="liquid-glass rounded-full pl-6 pr-2 py-2 flex items-center gap-3 shadow-2xl transition-all focus-within:ring-1 focus-within:ring-white/40">
+                    <svg class="w-5 h-5 text-white/50 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                    </svg>
+                    <input 
+                        type="email" 
+                        id="hero-email-input" 
+                        required 
+                        placeholder="Enter your email to join the waitlist..." 
+                        class="bg-transparent text-white placeholder:text-white/40 text-sm md:text-base w-full focus:outline-none font-body">
+                    <button 
+                        type="submit" 
+                        class="bg-white rounded-full p-3 text-black hover:scale-105 active:scale-95 transition-all shrink-0 cursor-pointer shadow-lg" 
+                        aria-label="Submit Waitlist Email">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <!-- CTAs Lockup -->
+            <div class="blur-reveal flex flex-wrap items-center justify-center gap-5 mb-8">
+                <button type="button" onclick="openWaitlistModal()" class="liquid-glass-strong rounded-full px-6 py-3 text-sm font-medium text-white hover:bg-white/10 transition-all flex items-center gap-2 cursor-pointer shadow-xl">
+                    <span>JOIN THE WAITLIST</span>
+                    <svg class="w-4 h-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="7" y1="17" x2="17" y2="7"></line>
+                        <polyline points="7 7 17 7 17 17"></polyline>
+                    </svg>
+                </button>
+
+                <a href="#why" class="text-sm text-white/80 hover:text-white font-medium flex items-center gap-2 transition-colors">
+                    <span>Explore Imperative</span>
+                    <svg class="w-4 h-4 fill-white" viewBox="0 0 24 24">
+                        <polygon points="6 4 20 12 6 20 6 4"></polygon>
+                    </svg>
+                </a>
+            </div>
+
+            <!-- Small Supporting Statement -->
+            <div class="blur-reveal text-xs font-mono tracking-widest uppercase text-white/60">
+                Quantum technology. Built for the software world.
+            </div>
+
+            <!-- Stats / Technical Matrix Row in Liquid-Glass Cards -->
+            <div class="blur-reveal flex flex-wrap items-stretch justify-center gap-4 mt-12 w-full max-w-2xl">
+                <div class="liquid-glass p-5 rounded-[1.25rem] w-full sm:w-[260px] text-left">
+                    <svg class="w-6 h-6 text-white/80 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <polyline points="12 6 12 12 16 14"></polyline>
+                    </svg>
+                    <div class="font-heading-italic text-3xl sm:text-4xl text-white tracking-[-1px] leading-none">
+                        2026–2030
+                    </div>
+                    <div class="text-xs text-white/70 font-body font-light mt-2">
+                        Post-Quantum Transition Window
+                    </div>
+                </div>
+
+                <div class="liquid-glass p-5 rounded-[1.25rem] w-full sm:w-[260px] text-left">
+                    <svg class="w-6 h-6 text-white/80 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
+                    </svg>
+                    <div class="font-heading-italic text-3xl sm:text-4xl text-white tracking-[-1px] leading-none">
+                        FIPS 203/204
+                    </div>
+                    <div class="text-xs text-white/70 font-body font-light mt-2">
+                        NIST Standardized Lattice Target
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Partners / Standardized Horizons (Prompt 1 Style) -->
+        <div class="relative z-10 max-w-4xl mx-auto px-6 text-center mt-12">
+            <div class="inline-block liquid-glass rounded-full px-4 py-1 text-xs font-medium text-white/80 mb-5">
+                Standards-Aligned Architectural Roadmap
+            </div>
+            <div class="flex flex-wrap items-center justify-center gap-8 md:gap-14 font-heading-italic text-xl sm:text-2xl text-white/75">
+                <span>NIST PQC</span>
+                <span>&bull;</span>
+                <span>ML-KEM</span>
+                <span>&bull;</span>
+                <span>ML-DSA</span>
+                <span>&bull;</span>
+                <span>SLH-DSA</span>
+                <span>&bull;</span>
+                <span>Hybrid Agility</span>
+            </div>
+        </div>
+
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- SECTION 2 — WHY (Liquid-Glass Capability Cards)           -->
+    <!-- ======================================================== -->
+    <section id="why" class="relative py-28 sm:py-36 bg-black border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-6 sm:px-8">
+            
+            <!-- Section Header -->
+            <div class="max-w-3xl mb-16 blur-reveal">
+                <div class="text-xs font-mono text-white/60 uppercase tracking-widest mb-4">
+                    // 01 THE IMPERATIVE
+                </div>
+                <h2 class="font-heading-italic text-5xl sm:text-6xl lg:text-7xl text-white leading-[0.95] tracking-[-2px] mb-6">
+                    The quantum era is coming.<br>
+                    Software needs to be ready.
+                </h2>
+                <p class="font-body font-light text-base sm:text-lg text-white/80 leading-relaxed max-w-2xl">
+                    Cryptography sits inside almost everything we use online. JJ Quantums is building developer-first infrastructure to help teams understand where quantum-era security changes affect their software.
+                </p>
+            </div>
+
+            <!-- 3 Liquid-Glass Feature Cards (Prompt 1 Spec) -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                
+                <!-- Card 1: DISCOVER -->
+                <div class="liquid-glass rounded-[1.25rem] p-7 min-h-[380px] flex flex-col justify-between blur-reveal group hover:scale-[1.01] transition-transform">
+                    <!-- Top Row -->
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="w-12 h-12 rounded-xl liquid-glass flex items-center justify-center text-white">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                                <line x1="11" y1="8" x2="11" y2="14"></line>
+                                <line x1="8" y1="11" x2="14" y2="11"></line>
+                            </svg>
+                        </div>
+                        <div class="flex flex-wrap justify-end gap-1.5 max-w-[70%]">
+                            <span class="liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white/80 whitespace-nowrap">TLS Cipher</span>
+                            <span class="liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white/80 whitespace-nowrap">RSA-2048</span>
+                            <span class="liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white/80 whitespace-nowrap">AST Extract</span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Content -->
+                    <div class="mt-8">
+                        <div class="text-[11px] font-mono text-white/50 uppercase tracking-widest mb-1">STAGE 01</div>
+                        <h3 class="font-heading-italic text-3xl sm:text-4xl text-white tracking-[-1px] leading-tight mb-3">
+                            DISCOVER
+                        </h3>
+                        <p class="text-sm text-white/85 font-body font-light leading-relaxed">
+                            Find cryptographic dependencies, algorithms, certificates, and other potential points of exposure.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 2: UNDERSTAND -->
+                <div class="liquid-glass rounded-[1.25rem] p-7 min-h-[380px] flex flex-col justify-between blur-reveal group hover:scale-[1.01] transition-transform">
+                    <!-- Top Row -->
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="w-12 h-12 rounded-xl liquid-glass flex items-center justify-center text-white">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                                <path d="M7 10l3 3 7-7"></path>
+                            </svg>
+                        </div>
+                        <div class="flex flex-wrap justify-end gap-1.5 max-w-[70%]">
+                            <span class="liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white/80 whitespace-nowrap">Shor Risk</span>
+                            <span class="liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white/80 whitespace-nowrap">HNDL Vector</span>
+                            <span class="liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white/80 whitespace-nowrap">Action Triage</span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Content -->
+                    <div class="mt-8">
+                        <div class="text-[11px] font-mono text-white/50 uppercase tracking-widest mb-1">STAGE 02</div>
+                        <h3 class="font-heading-italic text-3xl sm:text-4xl text-white tracking-[-1px] leading-tight mb-3">
+                            UNDERSTAND
+                        </h3>
+                        <p class="text-sm text-white/85 font-body font-light leading-relaxed">
+                            Turn technical findings into clear, actionable information developers can actually use.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 3: PREPARE -->
+                <div class="liquid-glass rounded-[1.25rem] p-7 min-h-[380px] flex flex-col justify-between blur-reveal group hover:scale-[1.01] transition-transform">
+                    <!-- Top Row -->
+                    <div class="flex items-start justify-between gap-4">
+                        <div class="w-12 h-12 rounded-xl liquid-glass flex items-center justify-center text-white">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+                                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                                <polyline points="9 12 11 14 15 10"></polyline>
+                            </svg>
+                        </div>
+                        <div class="flex flex-wrap justify-end gap-1.5 max-w-[70%]">
+                            <span class="liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white/80 whitespace-nowrap">ML-KEM</span>
+                            <span class="liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white/80 whitespace-nowrap">ML-DSA</span>
+                            <span class="liquid-glass rounded-full px-2.5 py-0.5 text-[10px] text-white/80 whitespace-nowrap">Dual KEM</span>
+                        </div>
+                    </div>
+
+                    <!-- Bottom Content -->
+                    <div class="mt-8">
+                        <div class="text-[11px] font-mono text-white/50 uppercase tracking-widest mb-1">STAGE 03</div>
+                        <h3 class="font-heading-italic text-3xl sm:text-4xl text-white tracking-[-1px] leading-tight mb-3">
+                            PREPARE
+                        </h3>
+                        <p class="text-sm text-white/85 font-body font-light leading-relaxed">
+                            Build a practical path from today’s cryptography toward a post-quantum future.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- SECTION 3 — FIRST PRODUCT: Quantums Guard                -->
+    <!-- ======================================================== -->
+    <section id="product" class="relative py-28 sm:py-36 bg-black border-t border-white/10">
+        <div class="max-w-6xl mx-auto px-6 sm:px-8">
+            
+            <!-- Section Header -->
+            <div class="max-w-3xl mb-14 blur-reveal">
+                <div class="inline-flex items-center gap-2 liquid-glass rounded-full px-3 py-1 mb-4 text-xs font-mono">
+                    <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span>
+                    <span class="text-white/90">FIRST PRODUCT &bull; IN DEVELOPMENT</span>
+                </div>
+                
+                <h2 class="font-heading-italic text-5xl sm:text-6xl lg:text-7xl text-white leading-[0.95] tracking-[-2px] mb-4">
+                    Quantums Guard
+                </h2>
+                
+                <p class="font-body text-xl sm:text-2xl text-white/90 font-light mb-4">
+                    Know what your software needs to change before the quantum era arrives.
+                </p>
+                
+                <p class="font-body text-sm sm:text-base text-white/70 leading-relaxed max-w-2xl font-light">
+                    A developer-first security platform for discovering quantum-vulnerable cryptography and understanding what to do next.
+                </p>
+            </div>
+
+            <!-- Conceptual Product Visualization in Liquid-Glass Shell -->
+            <div class="liquid-glass-strong rounded-[1.5rem] p-6 sm:p-8 blur-reveal shadow-2xl">
+                
+                <!-- Terminal Shell Header -->
+                <div class="flex flex-wrap items-center justify-between gap-4 pb-5 border-b border-white/10">
+                    <div class="flex items-center gap-2.5">
+                        <span class="w-3 h-3 rounded-full bg-white/20 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-white/20 inline-block"></span>
+                        <span class="w-3 h-3 rounded-full bg-white/20 inline-block"></span>
+                        <span class="ml-2 font-mono text-xs text-white/70">quantums-guard --inspect-repo ./infrastructure</span>
+                    </div>
+                    <div class="liquid-glass rounded-full px-3 py-1 text-[11px] font-mono text-white/70">
+                        CONCEPTUAL ARCHITECTURE PREVIEW // IN DEVELOPMENT
+                    </div>
+                </div>
+
+                <!-- Tabs Strip -->
+                <div class="flex border-b border-white/10 pt-3 text-xs font-mono">
+                    <button type="button" onclick="switchProductTab('cli')" id="tab-btn-cli" class="px-4 py-2.5 text-white border-b-2 border-white font-semibold focus:outline-none">
+                        01. CLI Inspection Engine
+                    </button>
+                    <button type="button" onclick="switchProductTab('inventory')" id="tab-btn-inventory" class="px-4 py-2.5 text-white/50 hover:text-white border-b-2 border-transparent focus:outline-none">
+                        02. Cryptographic Inventory
+                    </button>
+                    <button type="button" onclick="switchProductTab('migration')" id="tab-btn-migration" class="px-4 py-2.5 text-white/50 hover:text-white border-b-2 border-transparent focus:outline-none">
+                        03. Migration Blueprint
+                    </button>
+                </div>
+
+                <!-- Tab 1: CLI Execution -->
+                <div id="tab-content-cli" class="py-6 font-mono text-xs sm:text-sm text-white/80 leading-relaxed overflow-x-auto">
+                    <div class="text-white/40">// JJ Quantums Guard &bull; AST Cryptographic Static Extraction</div>
+                    <div class="text-white/90 mt-1">$ <span class="text-white">quantums-guard analyze --target ./gateway --compliance nist-pqc-2024</span></div>
+                    <div class="text-white/60 mt-2">[i] Initializing Abstract Syntax Tree (AST) scanner...</div>
+                    <div class="text-white/60">[i] Parsed 412 modules across Go, Rust, and TypeScript.</div>
+                    <div class="mt-4 text-white font-semibold">[!] 3 Vulnerable Asymmetric Primitives Identified:</div>
+                    
+                    <div class="mt-3 pl-4 border-l border-white/20 space-y-3">
+                        <div>
+                            <span class="text-amber-400 font-bold">[CRITICAL]</span>
+                            <span class="text-white ml-1">pkg/auth/tls_handshake.go:88</span> &rarr; <span class="text-white/70">RSA-2048</span>
+                            <div class="text-xs text-white/60">Threat: Shor's polynomial prime factorization | Harvest-Now-Decrypt-Later Risk: High</div>
+                            <div class="text-xs text-emerald-400 font-mono">&rarr; Recommended Target: ML-KEM-768 (NIST FIPS 203)</div>
+                        </div>
+
+                        <div>
+                            <span class="text-amber-400 font-bold">[CRITICAL]</span>
+                            <span class="text-white ml-1">services/identity/jwt_signing.rs:42</span> &rarr; <span class="text-white/70">ECDSA P-256</span>
+                            <div class="text-xs text-white/60">Threat: Discrete Logarithm Factorization | Signature Forgery Risk</div>
+                            <div class="text-xs text-emerald-400 font-mono">&rarr; Recommended Target: ML-DSA-65 (NIST FIPS 204)</div>
+                        </div>
+
+                        <div>
+                            <span class="text-sky-300 font-bold">[RESILIENT]</span>
+                            <span class="text-white ml-1">internal/cipher/storage_seal.go:19</span> &rarr; <span class="text-white/70">AES-256-GCM</span>
+                            <div class="text-xs text-white/60">Evaluation: Grover's search complexity reduces effective key length to 128-bit</div>
+                            <div class="text-xs text-emerald-400 font-mono">&rarr; Status: Quantum-Resistant (Key Length Compliant)</div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 pt-4 border-t border-white/10 flex flex-wrap items-center justify-between text-xs text-white/60 gap-2">
+                        <span>Quantums Guard Readiness Score: <strong class="text-white font-semibold">32 / 100</strong> (Action Required)</span>
+                        <span class="text-white/80 font-mono">Hybrid ML-KEM Wrapper Available</span>
+                    </div>
+                </div>
+
+                <!-- Tab 2: Inventory -->
+                <div id="tab-content-inventory" class="py-6 text-xs sm:text-sm text-white/80 font-mono overflow-x-auto hidden">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="border-b border-white/15 text-white/60">
+                                <th class="py-2.5 pr-4">Module / Path</th>
+                                <th class="py-2.5 pr-4">Classical Primitive</th>
+                                <th class="py-2.5 pr-4">Threat Model</th>
+                                <th class="py-2.5 pr-4">Post-Quantum Target</th>
+                                <th class="py-2.5">Readiness</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-white/10">
+                            <tr>
+                                <td class="py-3 pr-4 text-white">net/tls/listener.go</td>
+                                <td class="py-3 pr-4 text-white/70">ECDHE-P384</td>
+                                <td class="py-3 pr-4 text-amber-400">HNDL Risk</td>
+                                <td class="py-3 pr-4 text-emerald-400">ML-KEM-1024</td>
+                                <td class="py-3"><span class="liquid-glass rounded-full px-2.5 py-0.5 text-xs text-amber-400">Vulnerable</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 pr-4 text-white">auth/certs/issuer.ts</td>
+                                <td class="py-3 pr-4 text-white/70">RSA-4096 Sign</td>
+                                <td class="py-3 pr-4 text-amber-400">Shor Factorization</td>
+                                <td class="py-3 pr-4 text-emerald-400">ML-DSA-87</td>
+                                <td class="py-3"><span class="liquid-glass rounded-full px-2.5 py-0.5 text-xs text-amber-400">Vulnerable</span></td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 pr-4 text-white">db/vault/envelope.rs</td>
+                                <td class="py-3 pr-4 text-white/70">AES-256-XTS</td>
+                                <td class="py-3 pr-4 text-white/50">Grover Bound</td>
+                                <td class="py-3 pr-4 text-white/80">Maintain AES-256</td>
+                                <td class="py-3"><span class="liquid-glass rounded-full px-2.5 py-0.5 text-xs text-emerald-400">Compliant</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- Tab 3: Migration -->
+                <div id="tab-content-migration" class="py-6 text-xs sm:text-sm text-white/80 hidden">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="liquid-glass rounded-2xl p-5">
+                            <div class="text-[11px] font-mono text-white/50 uppercase tracking-widest mb-1">STAGE 1</div>
+                            <h4 class="font-heading-italic text-2xl text-white mb-2">Hybrid Wrappers</h4>
+                            <p class="text-xs text-white/70 font-light leading-relaxed">
+                                Combine classical key exchange with ML-KEM-768 dual-encapsulation to prevent retro-decryption without breaking legacy clients.
+                            </p>
+                        </div>
+                        <div class="liquid-glass rounded-2xl p-5">
+                            <div class="text-[11px] font-mono text-white/50 uppercase tracking-widest mb-1">STAGE 2</div>
+                            <h4 class="font-heading-italic text-2xl text-white mb-2">Cryptographic Agility</h4>
+                            <p class="text-xs text-white/70 font-light leading-relaxed">
+                                Decouple static cryptographic primitives into dynamic runtime providers capable of algorithm rotation via configuration.
+                            </p>
+                        </div>
+                        <div class="liquid-glass rounded-2xl p-5">
+                            <div class="text-[11px] font-mono text-white/50 uppercase tracking-widest mb-1">STAGE 3</div>
+                            <h4 class="font-heading-italic text-2xl text-white mb-2">Full PQC Native</h4>
+                            <p class="text-xs text-white/70 font-light leading-relaxed">
+                                Complete migration to NIST FIPS-standardized lattice-based algorithms across all production services and external APIs.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Shell Footer -->
+                <div class="pt-4 border-t border-white/10 flex items-center justify-between text-xs text-white/50 font-mono">
+                    <span>Quantums Guard &bull; Developer Platform</span>
+                    <span>Status: IN DEVELOPMENT</span>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- SECTION 4 — LONG-TERM VISION (Cinematic Video 2 BG)      -->
+    <!-- ======================================================== -->
+    <section id="vision" class="relative min-h-screen py-32 sm:py-40 flex flex-col justify-center bg-black overflow-hidden border-t border-white/10">
+        
+        <!-- Video 2: Cinematic Horizon / Nebula Background (JS rAF Crossfade) -->
+        <video 
+            id="vision-bg-video" 
+            class="fading-video absolute inset-0 w-full h-full object-cover z-0" 
+            muted 
+            playsinline 
+            preload="auto"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260418_094631_d30ab262-45ee-4b7d-99f3-5d5848c8ef13.mp4">
+        </video>
+
+        <!-- Vignette Layer -->
+        <div class="cinematic-vignette" aria-hidden="true"></div>
+
+        <div class="relative z-10 max-w-6xl mx-auto px-6 sm:px-8 w-full">
+            
+            <!-- Section Header -->
+            <div class="max-w-3xl mb-16 blur-reveal">
+                <div class="text-xs font-mono text-white/60 uppercase tracking-widest mb-4">
+                    // 02 HORIZON
+                </div>
+                <h2 class="font-heading-italic text-5xl sm:text-6xl lg:text-7xl text-white leading-[0.95] tracking-[-2px] mb-6">
+                    From cryptography to quantum computing.
+                </h2>
+                <div class="space-y-3 font-body font-light text-base sm:text-lg text-white/80 leading-relaxed">
+                    <p>
+                        JJ Quantums starts with post-quantum security.
+                    </p>
+                    <p class="text-white/60">
+                        Our long-term ambition reaches further — toward quantum software, optimization, simulation, and the technologies that will define the next era of computing.
+                    </p>
+                </div>
+            </div>
+
+            <!-- 5-Stage Progression Cards in Liquid-Glass -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 blur-reveal">
+                
+                <!-- Stage 1 -->
+                <div class="liquid-glass rounded-[1.25rem] p-6 flex flex-col justify-between min-h-[220px]">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-mono font-semibold text-white/50">01</span>
+                            <span class="bg-white/10 text-white rounded-full px-2 py-0.5 text-[10px] font-mono">NOW</span>
+                        </div>
+                        <h3 class="font-heading-italic text-2xl text-white leading-tight uppercase mb-2">
+                            POST-QUANTUM SECURITY
+                        </h3>
+                        <p class="text-xs text-white/70 font-light leading-relaxed">
+                            Software cryptographic discovery, inventory mapping, and quantum-resilient infrastructure.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[10px] font-mono text-white/50">
+                        Active Focus
+                    </div>
+                </div>
+
+                <!-- Stage 2 -->
+                <div class="liquid-glass rounded-[1.25rem] p-6 flex flex-col justify-between min-h-[220px]">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-mono font-semibold text-white/50">02</span>
+                            <span class="text-white/40 text-[10px] font-mono">STAGE 2</span>
+                        </div>
+                        <h3 class="font-heading-italic text-2xl text-white leading-tight uppercase mb-2">
+                            QUANTUM SOFTWARE
+                        </h3>
+                        <p class="text-xs text-white/70 font-light leading-relaxed">
+                            Developer frameworks, compilers, and algorithmic abstraction layers bridging classical architectures with quantum circuits.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[10px] font-mono text-white/50">
+                        Architecture R&D
+                    </div>
+                </div>
+
+                <!-- Stage 3 -->
+                <div class="liquid-glass rounded-[1.25rem] p-6 flex flex-col justify-between min-h-[220px]">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-mono font-semibold text-white/50">03</span>
+                            <span class="text-white/40 text-[10px] font-mono">STAGE 3</span>
+                        </div>
+                        <h3 class="font-heading-italic text-2xl text-white leading-tight uppercase mb-2">
+                            OPTIMIZATION
+                        </h3>
+                        <p class="text-xs text-white/70 font-light leading-relaxed">
+                            Quantum and quantum-inspired heuristics solving complex combinatorial problems in logistics, routing, and finance.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[10px] font-mono text-white/50">
+                        Horizon
+                    </div>
+                </div>
+
+                <!-- Stage 4 -->
+                <div class="liquid-glass rounded-[1.25rem] p-6 flex flex-col justify-between min-h-[220px]">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-mono font-semibold text-white/50">04</span>
+                            <span class="text-white/40 text-[10px] font-mono">STAGE 4</span>
+                        </div>
+                        <h3 class="font-heading-italic text-2xl text-white leading-tight uppercase mb-2">
+                            SIMULATION
+                        </h3>
+                        <p class="text-xs text-white/70 font-light leading-relaxed">
+                            Quantum-mechanical modeling of molecular structures, chemical systems, and advanced material physics.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[10px] font-mono text-white/50">
+                        Horizon
+                    </div>
+                </div>
+
+                <!-- Stage 5 -->
+                <div class="liquid-glass rounded-[1.25rem] p-6 flex flex-col justify-between min-h-[220px]">
+                    <div>
+                        <div class="flex items-center justify-between mb-4">
+                            <span class="text-xs font-mono font-semibold text-white/50">05</span>
+                            <span class="text-white/40 text-[10px] font-mono">STAGE 5</span>
+                        </div>
+                        <h3 class="font-heading-italic text-2xl text-white leading-tight uppercase mb-2">
+                            NEXT-GENERATION COMPUTING
+                        </h3>
+                        <p class="text-xs text-white/70 font-light leading-relaxed">
+                            Fault-tolerant, universally programmable quantum infrastructure embedded into global computational workflows.
+                        </p>
+                    </div>
+                    <div class="pt-3 border-t border-white/10 text-[10px] font-mono text-white/50">
+                        Long-Term Ambition
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- SECTION 5 — COMING SOON (Cinematic Video Background)     -->
+    <!-- ======================================================== -->
+    <section class="relative min-h-screen py-28 sm:py-36 bg-black border-t border-white/10 flex flex-col justify-center items-center text-center overflow-hidden">
+        
+        <!-- Video 3: Full-screen background video shifted down by 17% (translate-y-[17%]) -->
+        <video 
+            id="closing-bg-video" 
+            class="fading-video absolute inset-0 w-full h-full object-cover translate-y-[17%] z-0" 
+            muted 
+            playsinline 
+            preload="auto"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_115001_bcdaa3b4-03de-47e7-ad63-ae3e392c32d4.mp4">
+        </video>
+
+        <!-- Vignette Layer -->
+        <div class="cinematic-vignette" aria-hidden="true"></div>
+
+        <div class="max-w-4xl mx-auto px-6 relative z-10 blur-reveal w-full my-auto">
+            
+            <h2 class="font-heading-italic text-5xl sm:text-6xl md:text-7xl text-white leading-tight mb-4">
+                The quantum era won’t wait.
+            </h2>
+            
+            <p class="font-body text-lg sm:text-xl text-white/70 font-light mb-8">
+                We’re building now.
+            </p>
+
+            <!-- Large Brand Treatment in Liquid-Glass Banner -->
+            <div class="my-6 sm:my-10">
+                <div class="inline-block liquid-glass rounded-[2rem] px-8 sm:px-14 py-6 sm:py-8 shadow-2xl">
+                    <span class="font-heading-italic text-4xl sm:text-7xl md:text-8xl tracking-widest text-white uppercase">
+                        JJ QUANTUMS
+                    </span>
+                </div>
+            </div>
+
+            <!-- Small line -->
+            <div class="text-xs font-mono tracking-widest text-white/60 uppercase mb-8">
+                COMING SOON
+            </div>
+
+            <!-- Floating Liquid-Glass Email Input Bar -->
+            <div class="w-full max-w-xl mx-auto mb-6">
+                <form onsubmit="handleWaitlistSubmit(event)" class="liquid-glass rounded-full pl-6 pr-2 py-2 flex items-center gap-3 shadow-2xl transition-all focus-within:ring-1 focus-within:ring-white/40">
+                    <svg class="w-5 h-5 text-white/50 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+                        <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+                    </svg>
+                    <input 
+                        type="email" 
+                        required 
+                        placeholder="Enter your email to join the waitlist..." 
+                        class="bg-transparent text-white placeholder:text-white/40 text-sm md:text-base w-full focus:outline-none font-body">
+                    <button 
+                        type="submit" 
+                        class="bg-white rounded-full p-3 text-black hover:scale-105 active:scale-95 transition-all shrink-0 cursor-pointer shadow-lg" 
+                        aria-label="Submit Waitlist Email">
+                        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                            <polyline points="12 5 19 12 12 19"></polyline>
+                        </svg>
+                    </button>
+                </form>
+            </div>
+
+            <!-- CTA -->
+            <div class="inline-flex justify-center">
+                <button type="button" onclick="openWaitlistModal()" class="liquid-glass-strong rounded-full px-8 py-4 text-sm font-medium text-white hover:bg-white/10 transition-all flex items-center gap-2 cursor-pointer shadow-2xl">
+                    <span>JOIN THE WAITLIST</span>
+                    <span aria-hidden="true">&rarr;</span>
+                </button>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- ======================================================== -->
+    <!-- SECTION 6 — FOOTER                                       -->
+    <!-- ======================================================== -->
+    <footer class="border-t border-white/10 bg-black text-white/70 text-sm">
+        <div class="max-w-7xl mx-auto px-6 sm:px-8 py-16">
+            
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-14">
+                
+                <!-- Company Info -->
+                <div class="md:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-8 h-8 rounded-full liquid-glass flex items-center justify-center font-heading-italic text-lg text-white">
+                            Q
+                        </div>
+                        <span class="font-heading-italic text-xl text-white uppercase tracking-wider">
+                            JJ QUANTUMS
+                        </span>
+                    </div>
+
+                    <p class="font-mono text-xs text-white/50 uppercase tracking-widest">
+                        A company of JJ Coders Group
+                    </p>
+
+                    <p class="text-sm text-white/80 max-w-sm font-light leading-relaxed">
+                        Quantum technology for the software world.
+                    </p>
+                </div>
+
+                <!-- Conglomerate Links -->
+                <div class="space-y-3">
+                    <div class="text-xs font-mono uppercase tracking-wider text-white">
+                        JJ Coders Group
+                    </div>
+                    <ul class="space-y-2 text-xs font-light">
+                        <li><a href="/" class="hover:text-white transition-colors">JJ Coders Main Platform</a></li>
+                        <li><a href="/build/" class="hover:text-white transition-colors">JJ Build</a></li>
+                        <li><a href="/automate/" class="hover:text-white transition-colors">JJ Automate</a></li>
+                        <li><a href="/labs/" class="hover:text-white transition-colors">JJ Labs</a></li>
+                        <li><a href="/careers/" class="hover:text-white transition-colors">Careers</a></li>
+                    </ul>
+                </div>
+
+                <!-- Ecosystem Links -->
+                <div class="space-y-3">
+                    <div class="text-xs font-mono uppercase tracking-wider text-white">
+                        Official Channels
+                    </div>
+                    <ul class="space-y-2 text-xs font-light">
+                        <li>
+                            <a href="https://jjcoders.com" class="hover:text-white transition-colors flex items-center gap-1.5">
+                                <span>JJ Coders</span>
+                                <svg class="w-3 h-3 text-white/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/JJcoders00" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-1.5">
+                                <span>GitHub</span>
+                                <svg class="w-3 h-3 text-white/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/company/jjcoders" target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors flex items-center gap-1.5">
+                                <span>LinkedIn</span>
+                                <svg class="w-3 h-3 text-white/40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7V17"/></svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Governance -->
+            <div class="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono text-white/50">
+                <div>
+                    &copy; 2026 JJ Quantums &bull; A company of JJ Coders Group. All rights reserved.
+                </div>
+                <div>
+                    Chairman: Johan Jomet &bull; Interim CEO: Sharav Arora
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- ======================================================== -->
+    <!-- INTERACTIVE WAITLIST MODAL DIALOG                        -->
+    <!-- ======================================================== -->
+    <dialog id="waitlist-modal" class="backdrop:bg-black/85 backdrop:backdrop-blur-xl bg-transparent p-4 max-w-lg w-full m-auto rounded-3xl border-0 focus:outline-none">
+        <div class="liquid-glass-strong rounded-3xl p-6 sm:p-8 shadow-2xl relative">
+            
+            <!-- Close Button -->
+            <button type="button" onclick="closeWaitlistModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full liquid-glass flex items-center justify-center text-white/80 hover:text-white focus:outline-none transition-colors" aria-label="Close dialog">
+                &times;
+            </button>
+
+            <!-- Form Container -->
+            <div id="waitlist-form-container">
+                <div class="text-[11px] font-mono text-white/50 uppercase tracking-widest mb-2">EARLY ACCESS</div>
+                <h3 class="font-heading-italic text-3xl text-white mb-2">Join the Waitlist</h3>
+                <p class="text-xs sm:text-sm text-white/70 mb-6 font-light leading-relaxed">
+                    Be first to receive developer previews of <strong class="text-white">Quantums Guard</strong> and technical advisories on post-quantum software migration.
+                </p>
+
+                <form id="waitlist-form" onsubmit="handleWaitlistSubmit(event)" class="space-y-4">
+                    <div>
+                        <label for="waitlist-email" class="block text-xs font-mono text-white/60 mb-1.5 uppercase">Work or Developer Email</label>
+                        <input type="email" id="waitlist-email" required placeholder="developer@domain.com" class="w-full px-4 py-3 rounded-full bg-white/5 border border-white/10 text-white placeholder-white/30 text-sm font-body focus:outline-none focus:border-white/40 transition-colors">
+                    </div>
+
+                    <div>
+                        <label for="waitlist-role" class="block text-xs font-mono text-white/60 mb-1.5 uppercase">Primary Focus</label>
+                        <select id="waitlist-role" class="w-full px-4 py-3 rounded-full bg-black border border-white/10 text-white text-sm font-body focus:outline-none focus:border-white/40 transition-colors">
+                            <option value="developer">Software Engineer / Developer</option>
+                            <option value="security">Security Architect / CISO / AppSec</option>
+                            <option value="executive">CTO / VP Engineering / Leadership</option>
+                            <option value="researcher">Quantum / Cryptographic Researcher</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="pt-2">
+                        <button type="submit" class="w-full py-3.5 rounded-full bg-white text-black font-semibold text-xs uppercase tracking-wider hover:bg-white/90 transition-all cursor-pointer">
+                            <span>Request Access</span>
+                            <span aria-hidden="true">&rarr;</span>
+                        </button>
+                    </div>
+
+                    <p class="text-[0.68rem] text-white/40 text-center font-mono">
+                        Pre-launch stage &bull; No marketing spam &bull; Pure technical updates
+                    </p>
+                </form>
+            </div>
+
+            <!-- Confirmation State -->
+            <div id="waitlist-success-container" class="hidden text-center py-6">
+                <div class="w-12 h-12 rounded-full liquid-glass text-white mx-auto flex items-center justify-center font-bold text-xl mb-4">
+                    &#10003;
+                </div>
+                <h4 class="font-heading-italic text-3xl text-white mb-2">You're on the list</h4>
+                <p class="text-xs sm:text-sm text-white/70 leading-relaxed mb-6 font-light max-w-sm mx-auto">
+                    We’ve recorded your early access request. As Quantums Guard advances through closed engineering cycles, we’ll reach out to your team.
+                </p>
+                <button type="button" onclick="closeWaitlistModal()" class="liquid-glass rounded-full text-xs px-6 py-2.5 text-white/90 hover:text-white">
+                    <span>Close Window</span>
+                </button>
+            </div>
+
+        </div>
+    </dialog>
+
+
+    <!-- ======================================================== -->
+    <!-- SCRIPTS: CUSTOM RAF FADING VIDEO, MODAL & REVEALS        -->
+    <!-- ======================================================== -->
+    <script>
+        // Custom JavaScript Crossfade Loop for Videos (requestAnimationFrame driven)
+        function initFadingVideo(videoEl) {
+            if (!videoEl) return;
+
+            let rafId = null;
+            let fadingOut = false;
+            const FADE_MS = 500;
+            const FADE_OUT_LEAD = 0.55;
+
+            function fadeTo(target, duration) {
+                if (rafId) cancelAnimationFrame(rafId);
+                const startOpacity = parseFloat(videoEl.style.opacity || '0');
+                const startTime = performance.now();
+
+                function step(now) {
+                    const elapsed = now - startTime;
+                    const progress = Math.min(elapsed / duration, 1);
+                    const current = startOpacity + (target - startOpacity) * progress;
+                    videoEl.style.opacity = current;
+                    if (progress < 1) {
+                        rafId = requestAnimationFrame(step);
+                    }
+                }
+                rafId = requestAnimationFrame(step);
+            }
+
+            videoEl.addEventListener('loadeddata', () => {
+                videoEl.style.opacity = '0';
+                videoEl.play().catch(() => {});
+                fadeTo(1, FADE_MS);
+            });
+
+            videoEl.addEventListener('timeupdate', () => {
+                if (!fadingOut && videoEl.duration && (videoEl.duration - videoEl.currentTime <= FADE_OUT_LEAD) && (videoEl.duration - videoEl.currentTime > 0)) {
+                    fadingOut = true;
+                    fadeTo(0, FADE_MS);
+                }
+            });
+
+            videoEl.addEventListener('ended', () => {
+                videoEl.style.opacity = '0';
+                setTimeout(() => {
+                    videoEl.currentTime = 0;
+                    videoEl.play().catch(() => {});
+                    fadingOut = false;
+                    fadeTo(1, FADE_MS);
+                }, 100);
+            });
+
+            // Fallback kick-off if already cached
+            if (videoEl.readyState >= 2) {
+                videoEl.play().catch(() => {});
+                fadeTo(1, FADE_MS);
+            }
+        }
+
+        // Initialize videos
+        initFadingVideo(document.getElementById('hero-bg-video'));
+        initFadingVideo(document.getElementById('vision-bg-video'));
+        initFadingVideo(document.getElementById('closing-bg-video'));
+
+        // Modal Handlers
+        const waitlistModal = document.getElementById('waitlist-modal');
+        const formContainer = document.getElementById('waitlist-form-container');
+        const successContainer = document.getElementById('waitlist-success-container');
+
+        function openWaitlistModal() {
+            if (waitlistModal) {
+                if (localStorage.getItem('jj_quantums_waitlist_registered')) {
+                    formContainer.classList.add('hidden');
+                    successContainer.classList.remove('hidden');
+                } else {
+                    formContainer.classList.remove('hidden');
+                    successContainer.classList.add('hidden');
+                }
+                waitlistModal.showModal();
+            }
+        }
+
+        function closeWaitlistModal() {
+            if (waitlistModal) {
+                waitlistModal.close();
+            }
+        }
+
+        if (waitlistModal) {
+            waitlistModal.addEventListener('click', (e) => {
+                const rect = waitlistModal.getBoundingClientRect();
+                if (
+                    e.clientX < rect.left ||
+                    e.clientX > rect.right ||
+                    e.clientY < rect.top ||
+                    e.clientY > rect.bottom
+                ) {
+                    closeWaitlistModal();
+                }
+            });
+        }
+
+        function handleWaitlistSubmit(e) {
+            e.preventDefault();
+            const emailInput = document.getElementById('waitlist-email') || document.getElementById('hero-email-input');
+            if (emailInput && emailInput.value) {
+                try {
+                    localStorage.setItem('jj_quantums_waitlist_registered', 'true');
+                    localStorage.setItem('jj_quantums_waitlist_email', emailInput.value);
+                } catch (err) {}
+                
+                // Show modal success
+                if (waitlistModal && !waitlistModal.open) {
+                    waitlistModal.showModal();
+                }
+                formContainer.classList.add('hidden');
+                successContainer.classList.remove('hidden');
+            }
+        }
+
+        // Mobile Menu Toggle
+        const mobileToggleBtn = document.getElementById('mobile-toggle-btn');
+        const mobileDrawer = document.getElementById('mobile-drawer');
+
+        if (mobileToggleBtn && mobileDrawer) {
+            mobileToggleBtn.addEventListener('click', () => {
+                mobileDrawer.classList.toggle('hidden');
+            });
+
+            document.querySelectorAll('.mobile-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileDrawer.classList.add('hidden');
+                });
+            });
+        }
+
+        // Tab Switching in First Product Section
+        function switchProductTab(tabName) {
+            const tabs = ['cli', 'inventory', 'migration'];
+            tabs.forEach(t => {
+                const btn = document.getElementById('tab-btn-' + t);
+                const content = document.getElementById('tab-content-' + t);
+                if (btn && content) {
+                    if (t === tabName) {
+                        btn.className = "px-4 py-2.5 text-white border-b-2 border-white font-semibold focus:outline-none";
+                        content.classList.remove('hidden');
+                    } else {
+                        btn.className = "px-4 py-2.5 text-white/50 hover:text-white border-b-2 border-transparent focus:outline-none";
+                        content.classList.add('hidden');
+                    }
+                }
+            });
+        }
+
+        // Blur-In Scroll Reveals (IntersectionObserver)
+        const revealElements = document.querySelectorAll('.blur-reveal');
+        if ('IntersectionObserver' in window) {
+            const observer = new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -40px 0px'
+            });
+
+            revealElements.forEach(el => observer.observe(el));
+        } else {
+            revealElements.forEach(el => el.classList.add('is-visible'));
+        }
+    </script>
+</body>
+</html>
